@@ -72,7 +72,11 @@ function createGameCard() {
 
 // Function to initialize tally counts for the current card
 function initializeTallyCount() {
+    
     for (const playerName in playerTallies) {
+        const elementId = `${playerName}Tally${cardCount}`;
+        const element = document.getElementById(elementId);
+        console.log(`Element ID: ${elementId}, Element: ${element}`);
         playerTallies[playerName][cardCount] = 0;
         document.getElementById(`${playerName}Tally${cardCount}`).textContent = 0;
     }
