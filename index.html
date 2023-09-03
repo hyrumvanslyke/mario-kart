@@ -3,43 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VanSlyke Family Mario Kart Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Game Tally Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .player-tally {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>VanSlyke Family Game  Tracker</h1>
-    </header>
-    <main>
-        <section class="players">
-            <h2>Family Members</h2>
-            <ul class="player-list">
-                <li>Hyrum</li>
-                <li>Killian</li>
-                <li>Roger</li>
-                <li>Anne</li>
-                <li>Miriam</li>
-                <li>Ella</li>
-                <li>David</li>
-                <li>Josh</li>
-            </ul>
-        </section>
-        <section class="results">
-            <h2>Race Results</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Player</th>
-                        <th>Wins</th>
-                        <th>Placings</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Add race results here -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-    <script src="app.js"></script>
+    <form id="gameForm">
+        <label for="gameTitle">Game Title:</label>
+        <input type="text" id="gameTitle" required>
+        <label for="gameImage">Game Image URL:</label>
+        <input type="url" id="gameImage" required>
+        <button type="submit">Create Card</button>
+    </form>
+    <div id="gameContainer"></div>
+
+    <script>
+        let cardCount = 0;
+
+        document.getElementById('gameForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            createGameCard();
+        });
+
+        function createGameCard() {
+            cardCount++;
+
+            const gameTitle = document.getElementById('gameTitle').value;
+            const gameImageURL = document.getElementById('gameImage').value;
+
+            // Create a new game card
+            const gameCard = document.createElement('div');
+            gameCard.className = 'card';
+            gameCard.innerHTML = `
+                <h2>Game Card ${cardCount}</h2>
+                <img src="${gameImageURL}" alt="${gameTitle}" width="200">
+                <h3>${gameTitle}</h3>
+                <div class="player-tally">
+                    <div>
+                        <p>Hyrum</p>
+                        <button onclick="incrementTally('hyrum${cardCount}')">+</button>
+                        <span id="hyrumTally${cardCount}">0</span>
+                        <p>Hyrum</p>
+                        <button onclick="incrementTally('hyrum${cardCount}')">+</button>
+                        <span id="hyrumTally${cardCount}">0</span>
+                    </div>
+                    <!-- Add similar markup for other players -->
+                </div>
+            `;
+
+            // Add the new game card to the container
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.appendChild(gameCard);
+
+            // Initialize tally counts for this card
+            const tallyCounts = {
+                hyrum: 0,
+                killian: 0,
+                Anne: 0,
+                Roger: 0,
+                Ella: 0,
+                Miri: 0,
+                David: 0,
+                Josh: 0,
+            };
+
+            // Function to increment the tally for a player on this card
+            function incrementTally(playerName) {
+                tallyCounts[playerName]++;
+                document.getElementById(`${playerName}Tally${cardCount}`).textContent = tallyCounts[playerName];
+            }
+
+            // Clear the form fields
+            document.getElementById('gameTitle').value = '';
+            document.getElementById('gameImage').value = '';
+        }
+    </script>
 </body>
 </html>
