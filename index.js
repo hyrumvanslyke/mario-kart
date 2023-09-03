@@ -16,7 +16,46 @@ function createGameCard() {
         <img src="${gameImageURL}" alt="${gameTitle}" width="200">
         <h3>${gameTitle}</h3>
         <div class="player-tally">
-            <!-- ... Player tally HTML ... -->
+        <div>
+        <p>Hyrum</p>
+        <button onclick="incrementTally('hyrum${cardCount}')">+</button>
+        <span id="hyrumTally${cardCount}">0</span>
+    </div>
+    <div>
+    <p>Killian</p>
+    <button onclick="incrementTally('killian${cardCount}')">+</button>
+    <span id="killianTally${cardCount}">0</span>
+</div>
+<div>
+    <p>Anne</p>
+    <button onclick="incrementTally('anne${cardCount}')">+</button>
+    <span id="anneTally${cardCount}">0</span>
+</div>
+<div>
+    <p>Roger</p>
+    <button onclick="incrementTally('roger${cardCount}')">+</button>
+    <span id="rogerTally${cardCount}">0</span>
+</div>
+<div>
+    <p>Ella</p>
+    <button onclick="incrementTally('ella${cardCount}')">+</button>
+    <span id="ellaTally${cardCount}">0</span>
+</div>
+<div>
+    <p>Miri</p>
+    <button onclick="incrementTally('miri${cardCount}')">+</button>
+    <span id="miriTally${cardCount}">0</span>
+</div>
+<div>
+    <p>David</p>
+    <button onclick="incrementTally('david${cardCount}')">+</button>
+    <span id="davidTally${cardCount}">0</span>
+</div>
+<div>
+    <p>Josh</p>
+    <button onclick="incrementTally('josh${cardCount}')">+</button>
+    <span id="joshTally${cardCount}">0</span>
+</div>
         </div>
     `;
 
@@ -90,7 +129,7 @@ for (const playerName of players) {
 // Initial setup for tally counts (Game Card 0)
 initializeTallyCount();
 
-// Call the load function to load saved tallies and card data when the page loads
-loadPlayerTalliesFromLocalStorage();
+// Call the load function to load saved card data when the page loads
 loadCardDataFromLocalStorage();
+
 
